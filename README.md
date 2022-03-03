@@ -1,13 +1,12 @@
 # client-serveur
 
-Command to run the application:
-
-First time:
+Install the app
 `cd frontend && npm i`
-`mvn clean install`
+`cd .. && mvn clean install`
 
+Launch the app
 `mvn --projects backend spring-boot:run`
 
-Application local url:
+# Application local url:
 
 http://localhost:8080
