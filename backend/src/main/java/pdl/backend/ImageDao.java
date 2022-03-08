@@ -2,6 +2,8 @@ package pdl.backend;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,16 +18,27 @@ public class ImageDao implements Dao<Image> {
 
   private final Map<Long, Image> images = new HashMap<>();
 
-  public ImageDao() {
-    final ClassPathResource imgFile = new ClassPathResource("test.jpg");
-    byte[] fileContent;
-    try {
-      fileContent = Files.readAllBytes(imgFile.getFile().toPath());
-      Image img = new Image("test.jpg", fileContent);
-      images.put(img.getId(), img);
-    } catch (final IOException e) {
-      e.printStackTrace();
-    }
+  public ImageDao() throws IOException {
+    Path path = Paths.get("images");
+    if (!Files.exists(path)) {
+      throw new IOException("'images' folder not found");
+    };
+
+    Files.find(path, 999, (p, bfa) -> bfa.isRegularFile()).forEach((Path imgPath) -> {
+      byte[] fileContent;
+      try {
+        String contentType = Files.probeContentType(imgPath);
+        if (contentType.equalsIgnoreCase("image/jpeg") || contentType.equalsIgnoreCase("image/png")) {
+          fileContent = Files.readAllBytes(imgPath);
+          Image img = new Image(imgPath.toString(), fileContent);
+          images.put(img.getId(), img);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+    ;
+
   }
 
   @Override
