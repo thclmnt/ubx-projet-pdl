@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,13 +39,16 @@ public class ImageController {
   }
 
   @RequestMapping(value = "/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-  public ResponseEntity<?> getImage(@PathVariable("id") long id) {
+  public ResponseEntity<?> getImage(@PathVariable("id") long id, @RequestParam Map<String, String> params) {
 
     Optional<Image> image = imageDao.retrieve(id);
-
     if (image.isPresent()) {
-      InputStream inputStream = new ByteArrayInputStream(image.get().getData());
-      return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(inputStream));
+      if (params.isEmpty()) {
+        InputStream inputStream = new ByteArrayInputStream(image.get().getData());
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(inputStream));
+      } else {
+        // handle image conversion to planar<grayU8>
+      }
     }
     return new ResponseEntity<>("Image id=" + id + " not found.", HttpStatus.NOT_FOUND);
   }
