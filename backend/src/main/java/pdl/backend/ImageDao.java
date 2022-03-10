@@ -30,7 +30,7 @@ public class ImageDao implements Dao<Image> {
         String contentType = Files.probeContentType(imgPath);
         if (contentType.equalsIgnoreCase("image/jpeg") || contentType.equalsIgnoreCase("image/png")) {
           fileContent = Files.readAllBytes(imgPath);
-          Image img = new Image(imgPath.toString(), fileContent);
+          Image img = new Image(imgPath.getFileName().toString(), fileContent);
           images.put(img.getId(), img);
         }
       } catch (IOException e) {
