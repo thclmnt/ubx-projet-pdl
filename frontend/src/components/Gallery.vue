@@ -59,19 +59,16 @@ api.getImageList()
 
 <style>
 
-#gallery{
-    display: inline-flex;
-    flex-flow: row;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 img {
-    max-width: 220px;
-    max-height: 220px;
-    border-radius: 5px;
+    display: inline-flex;
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    margin: 30px 20px;
 }
 img:hover
 {
