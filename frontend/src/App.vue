@@ -30,6 +30,7 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #2c3e50;
 }
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -39,6 +40,9 @@ ul {
 }
 li {
   float: left;
+}
+li:hover{
+  filter:opacity(0.6);
 }
 li a {
   display: block;
