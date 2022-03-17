@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import router from "@/router";
 import { api } from '@/http-api';
 import { ImageType } from '@/image'
-
+document.title = 'Home'
 const selectedId = ref(-1);
 const imageList = ref<ImageType[]>([]);
 getImageList();

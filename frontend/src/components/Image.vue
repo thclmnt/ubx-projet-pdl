@@ -4,6 +4,7 @@ import ImageDisplay from "./ImageDisplay.vue";
 import Delete from "./buttons/Delete.vue";
 import Download from "./buttons/Download.vue";
 import Algorithm from "./buttons/Algorithm.vue";
+document.title = 'Image'
 
 const props = defineProps<{ id: number }>();
 </script>

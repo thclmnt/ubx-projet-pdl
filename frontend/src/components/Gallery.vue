@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 
 const imageList = ref<ImageType[]>([]);
 var selectedId = ref(-1);
+document.title = 'Gallerie'
 
 api.getImageList()
   .then((data) => {
