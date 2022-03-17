@@ -18,6 +18,7 @@ const requests = {
 export const api = {
   getImageList: (): Promise<ImageType[]> => requests.get('images', {}),
   getImage: (id: number): Promise<Blob> => requests.get(`images/${id}`, { responseType: "blob" }),
+  getImageFilter: (id: number, params: string): Promise<Blob> => requests.get(`images/${id}?${params}`, { responseType: "blob" }),
   createImage: (form: FormData): Promise<ImageType> => requests.post('images', form),
   deleteImage: (id: number): Promise<void> => requests.delete(`images/${id}`),
 };

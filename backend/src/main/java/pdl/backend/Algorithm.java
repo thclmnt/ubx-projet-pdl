@@ -15,6 +15,7 @@ import boofcv.struct.image.Planar;
 public class Algorithm {
     public static ResponseEntity<?> filter(InputStream image, Map<String, String> params) {
         // id?algorithm=X&p1=Y&p2=Z
+        System.out.println(params.toString());
         if (params.containsKey("algorithm")) {
             Planar<GrayU8> planar = Converter.InputStreamToPlanar(image);
             InputStream output;
@@ -25,7 +26,7 @@ public class Algorithm {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     if (!(params.get("type").equalsIgnoreCase("moyen")
-                            && params.get("type").equalsIgnoreCase("gaussien"))) {
+                            || params.get("type").equalsIgnoreCase("gaussien"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     if (!NumberUtils.isParsable(params.get("value"))) {
@@ -49,7 +50,7 @@ public class Algorithm {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     if (!(params.get("canal").equalsIgnoreCase("S")
-                            && params.get("canal").equalsIgnoreCase("V"))) {
+                            || params.get("canal").equalsIgnoreCase("V"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     output = Converter.PlanarToInputStream(planar);
