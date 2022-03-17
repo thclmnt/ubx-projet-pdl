@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { api } from '@/http-api';
+document.title = 'Upload'
 
 const target = ref<HTMLInputElement>();
 

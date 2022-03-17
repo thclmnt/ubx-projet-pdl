@@ -3,6 +3,7 @@ import { defineProps } from "vue";
 import ImageDisplay from "./ImageDisplay.vue";
 import Delete from "./buttons/Delete.vue";
 import Download from "./buttons/Download.vue";
+document.title = 'Image'
 
 const props = defineProps<{ id: number }>();
 </script>
