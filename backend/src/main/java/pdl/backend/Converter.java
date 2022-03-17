@@ -16,7 +16,6 @@ public class Converter {
     public static Planar<GrayU8> InputStreamToPlanar(InputStream input) {
         try {
             BufferedImage buffer = ImageIO.read(input);
-            // Planar<GrayU8> planar = ConvertRaster.bufferedToPlanar_U8(buffer, dst);
             Planar<GrayU8> planar = ConvertBufferedImage.convertFromPlanar(buffer, null, true, GrayU8.class);
             return planar;
         } catch (IOException e) {

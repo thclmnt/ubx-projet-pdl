@@ -47,7 +47,9 @@ public class ImageController {
         InputStream inputStream = new ByteArrayInputStream(image.get().getData());
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(inputStream));
       } else {
-        // handle image conversion to planar<grayU8>
+        InputStream inputStream = new ByteArrayInputStream(image.get().getData());
+        ResponseEntity<?> response = Algorithm.filter(inputStream, params);
+        return response;
       }
     }
     return new ResponseEntity<>("Image id=" + id + " not found.", HttpStatus.NOT_FOUND);
