@@ -53,12 +53,14 @@ function applyAlgorithm() {
 			<option value="moyen">Moyen</option>
 			<option value="gaussien">Gaussien</option>
 		</select>
-		<p>Valeur</p>
-		<input type="range" min="0" max="100" value="50" />
+		<p>Valeur :</p>
+		<input type="range" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value"/>
+		<output>50</output>
 	</div>
 	<div id="color" v-if="selectedAlgorithm === 'color'">
-		<p>Valeur</p>
-		<input type="range" min="0" max="100" value="50" />
+		<p>Valeur :</p>
+		<input type="range" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value"/>
+		<output>50</output>
 	</div>
 	<div id="histogramequalization" v-if="selectedAlgorithm === 'histogramequalization'">
 		<p>Canal</p>
@@ -68,8 +70,9 @@ function applyAlgorithm() {
 		</select>
 	</div>
 	<div id="luminosity" v-if="selectedAlgorithm === 'luminosity'">
-		<p>Valeur</p>
-		<input type="range" min="0" max="100" value="50" />
+		<p>Valeur :</p>
+		<input type="range" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value"/>
+		<output>50</output>
 	</div>
 	<div id="outline" v-if="selectedAlgorithm === 'outline'"></div>
 	<button @click="applyAlgorithm">Apply Algorithm</button>
