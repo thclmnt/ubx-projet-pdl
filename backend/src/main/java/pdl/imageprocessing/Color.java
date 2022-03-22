@@ -12,7 +12,7 @@ import boofcv.struct.image.Planar;
 import java.awt.image.BufferedImage;
 
 public class Color {
-    public static void filtreColore(Planar<GrayU8> image, Planar<GrayU8> output, int teinte){
+    public static void color(Planar<GrayU8> image, Planar<GrayU8> output, int teinte){
         float[] hsv = new float[3];
         int [] rgb = new int[3];
         Rgbhsv my_fonc = new Rgbhsv();
