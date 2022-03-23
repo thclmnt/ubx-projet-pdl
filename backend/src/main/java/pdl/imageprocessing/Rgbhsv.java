@@ -1,4 +1,4 @@
-package imageprocessing;
+package pdl.imageprocessing;
 
 public class Rgbhsv {
     
