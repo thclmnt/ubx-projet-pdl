@@ -18,7 +18,6 @@ import pdl.imageprocessing.Luminosity;
 public class Algorithm {
     public static ResponseEntity<?> filter(InputStream image, Map<String, String> params) {
         // id?algorithm=X&p1=Y&p2=Z
-        System.out.println(params.toString());
         if (params.containsKey("algorithm")) {
             Planar<GrayU8> planar = Converter.InputStreamToPlanar(image);
             Planar<GrayU8> copy = planar.clone();
