@@ -1,20 +1,11 @@
 package pdl.imageprocessing;
 
-import javax.print.attribute.standard.MediaSize.Other;
-import boofcv.alg.color.ColorHsv;
-import boofcv.alg.filter.blur.GBlurImageOps;
-import boofcv.alg.filter.convolve.GConvolveImageOps;
-import boofcv.io.image.ConvertBufferedImage;
-import boofcv.io.image.UtilImageIO;
-import boofcv.struct.convolve.Kernel1D_S32;
-import boofcv.struct.convolve.Kernel2D_S32;
 import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
-import java.awt.image.BufferedImage;
 
 public class Luminosity {
 
-    public static luminosity(Planar<GrayU8> image, Planar<GrayU8> output, int delta){
+    public static void luminosity(Planar<GrayU8> image, Planar<GrayU8> output, int delta){
         for (int y = 0; y < image.height; ++y) {
 			for (int x = 0; x < image.width; ++x) {
                 int gr0 = image.getBand(0).get(x, y) + delta ;
