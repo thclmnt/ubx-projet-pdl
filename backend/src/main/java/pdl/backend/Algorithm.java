@@ -11,6 +11,9 @@ import org.springframework.http.MediaType;
 import java.io.InputStream;
 import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
+import pdl.imageprocessing.Blur;
+import pdl.imageprocessing.Color;
+import pdl.imageprocessing.Luminosity;
 
 public class Algorithm {
     public static ResponseEntity<?> filter(InputStream image, Map<String, String> params) {
@@ -18,7 +21,9 @@ public class Algorithm {
         System.out.println(params.toString());
         if (params.containsKey("algorithm")) {
             Planar<GrayU8> planar = Converter.InputStreamToPlanar(image);
+            Planar<GrayU8> copy = planar.clone();
             InputStream output;
+            int value;
             switch (params.get("algorithm")) {
                 case "blur":
                     // id?algorithm=blur&type=moyen|gaussien&value=X
@@ -32,7 +37,15 @@ public class Algorithm {
                     if (!NumberUtils.isParsable(params.get("value"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    output = Converter.PlanarToInputStream(planar);
+
+                    if (params.get("type").equalsIgnoreCase("moyen")) {
+                        value = NumberUtils.toInt(params.get("value"),0);
+                        Blur.moyen(planar, copy, value);
+                    } else {
+                        value = NumberUtils.toInt(params.get("value"),0);
+                        // Blur.gaussien(planar, copy);
+                    }
+                    output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 case "color":
                     // id?algorithm=color&value=X
@@ -42,7 +55,11 @@ public class Algorithm {
                     if (!NumberUtils.isParsable(params.get("value"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    output = Converter.PlanarToInputStream(planar);
+
+                    value = NumberUtils.toInt(params.get("value"),0);
+                    Color.color(planar, copy, value);
+                    
+                    output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 case "histogramequalization":
                     // id?algorithm=histogramequalization&canal=S|V
@@ -53,7 +70,7 @@ public class Algorithm {
                             || params.get("canal").equalsIgnoreCase("V"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    output = Converter.PlanarToInputStream(planar);
+                    output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 case "luminosity":
                     // id?algorithm=luminosity&value=X
@@ -63,12 +80,16 @@ public class Algorithm {
                     if (!NumberUtils.isParsable(params.get("value"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    output = Converter.PlanarToInputStream(planar);
+
+                    value = NumberUtils.toInt(params.get("value"),0);
+                    Luminosity.luminosity(planar, copy, value);
+
+                    output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 case "outline":
                     // id?algorithm=outline
 
-                    output = Converter.PlanarToInputStream(planar);
+                    output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
 
                 default:
