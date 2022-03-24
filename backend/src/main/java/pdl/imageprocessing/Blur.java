@@ -4,7 +4,8 @@ import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
 
 public class Blur {
-    public static void moyen(Planar<GrayU8> image, Planar<GrayU8> output, int size) {
+    public static void moyen(Planar<GrayU8> image, Planar<GrayU8> output) {
+        int size = 7;
         for (int y = size/2; y < image.height-size/2; ++y) {
             for (int x = size/2; x < image.width - size/2; ++x) {
                 int r0=0;

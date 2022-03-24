@@ -27,22 +27,16 @@ public class Algorithm {
             switch (params.get("algorithm")) {
                 case "blur":
                     // id?algorithm=blur&type=moyen|gaussien&value=X
-                    if (!(params.containsKey("type") && params.containsKey("value"))) {
+                    if (!(params.containsKey("type"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     if (!(params.get("type").equalsIgnoreCase("moyen")
                             || params.get("type").equalsIgnoreCase("gaussien"))) {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
-                    if (!NumberUtils.isParsable(params.get("value"))) {
-                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-                    }
-
                     if (params.get("type").equalsIgnoreCase("moyen")) {
-                        value = NumberUtils.toInt(params.get("value"),0);
-                        Blur.moyen(planar, copy, value);
+                        Blur.moyen(planar, copy);
                     } else {
-                        value = NumberUtils.toInt(params.get("value"),0);
                         Blur.gaussien(planar, copy);
                     }
                     output = Converter.PlanarToInputStream(copy);
@@ -56,9 +50,9 @@ public class Algorithm {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
 
-                    value = NumberUtils.toInt(params.get("value"),0);
+                    value = NumberUtils.toInt(params.get("value"), 0);
                     Color.color(planar, copy, value);
-                    
+
                     output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 case "histogramequalization":
@@ -81,7 +75,7 @@ public class Algorithm {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
 
-                    value = NumberUtils.toInt(params.get("value"),0);
+                    value = NumberUtils.toInt(params.get("value"), 0);
                     Luminosity.luminosity(planar, copy, value);
 
                     output = Converter.PlanarToInputStream(copy);
