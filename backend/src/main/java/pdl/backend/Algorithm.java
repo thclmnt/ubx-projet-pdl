@@ -43,7 +43,7 @@ public class Algorithm {
                         Blur.moyen(planar, copy, value);
                     } else {
                         value = NumberUtils.toInt(params.get("value"),0);
-                        // Blur.gaussien(planar, copy);
+                        Blur.gaussien(planar, copy);
                     }
                     output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
