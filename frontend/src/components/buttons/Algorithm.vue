@@ -12,8 +12,7 @@ function applyAlgorithm() {
 		const div = document.getElementById(selectedAlgorithm.value);
 		if (selectedAlgorithm.value === "blur") {
 			const selectValue = div?.querySelector("select")?.value;
-			const inputValue = div?.querySelector("input")?.value;
-			params += "&type=" + selectValue + "&value=" + inputValue;
+			params += "&type=" + selectValue;
 		} else if (selectedAlgorithm.value === "color") {
 			const inputValue = div?.querySelector("input")?.value;
 			params += "&value=" + inputValue;
@@ -69,15 +68,6 @@ function applyAlgorithm() {
 			<option value="moyen">Moyen</option>
 			<option value="gaussien">Gaussien</option>
 		</select>
-		<p>Valeur :</p>
-		<input
-			type="range"
-			min="0"
-			max="255"
-			value="0"
-			oninput="this.nextElementSibling.value = this.value"
-		/>
-		<output>0</output>
 	</div>
 	<div id="color" v-if="selectedAlgorithm === 'color'">
 		<p>Valeur :</p>
