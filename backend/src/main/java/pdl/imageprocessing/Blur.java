@@ -31,7 +31,13 @@ public class Blur {
         }
     }
 
-    public static void gaussien(Planar<GrayU8> image, Planar<GrayU8> output, int[][] kernel) {
+    public static void gaussien(Planar<GrayU8> image, Planar<GrayU8> output) {
+
+        int [][] kernel =   {{1,2,3,2,1},
+                            {2,6,8,6,2},
+                            {3,8,10,8,3},
+                            {2,6,8,6,2},
+                            {1,2,3,2,1}};
         int s=0;
         for(int x=0; x<kernel.length; x++){
           for(int y=0; y<kernel[0].length; y++){
