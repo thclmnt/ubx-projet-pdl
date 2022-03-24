@@ -14,6 +14,7 @@ import boofcv.struct.image.Planar;
 import pdl.imageprocessing.Blur;
 import pdl.imageprocessing.Color;
 import pdl.imageprocessing.Luminosity;
+import pdl.imageprocessing.Outline;
 
 public class Algorithm {
     public static ResponseEntity<?> filter(InputStream image, Map<String, String> params) {
@@ -88,6 +89,7 @@ public class Algorithm {
                 case "outline":
                     // id?algorithm=outline
 
+                    Outline.outline(planar, copy);
                     output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
 

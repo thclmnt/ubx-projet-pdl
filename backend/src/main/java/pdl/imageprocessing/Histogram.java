@@ -1,6 +1,5 @@
-package main.java.pdl.imageprocessing;
+package pdl.imageprocessing;
 
-import boofcv.io.image.UtilImageIO;
 import boofcv.struct.image.GrayU8;
 
 public class Histogram {

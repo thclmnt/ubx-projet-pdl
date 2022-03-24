@@ -77,7 +77,7 @@ function applyAlgorithm() {
 			value="0"
 			oninput="this.nextElementSibling.value = this.value"
 		/>
-		<output>50</output>
+		<output>0</output>
 	</div>
 	<div id="color" v-if="selectedAlgorithm === 'color'">
 		<p>Valeur :</p>
@@ -88,7 +88,7 @@ function applyAlgorithm() {
 			value="0"
 			oninput="this.nextElementSibling.value = this.value"
 		/>
-		<output>50</output>
+		<output>0</output>
 	</div>
 	<div
 		id="histogramequalization"
@@ -109,7 +109,7 @@ function applyAlgorithm() {
 			value="0"
 			oninput="this.nextElementSibling.value = this.value"
 		/>
-		<output>50</output>
+		<output>0</output>
 	</div>
 	<div id="outline" v-if="selectedAlgorithm === 'outline'"></div>
 	<button @click="applyAlgorithm">Apply Algorithm</button>

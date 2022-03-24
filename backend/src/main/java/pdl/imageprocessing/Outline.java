@@ -1,19 +1,7 @@
 package pdl.imageprocessing;
 
-import javax.print.attribute.standard.MediaSize.Other;
-import boofcv.alg.filter.blur.GBlurImageOps;
-import boofcv.alg.feature.detect.extract.NonMaxBlockSearchRelaxed.Max;
-import boofcv.alg.filter.convolve.GConvolveImageOps;
-import boofcv.io.image.ConvertBufferedImage;
-import boofcv.io.image.UtilImageIO;
-import boofcv.struct.convolve.Kernel1D_S32;
-import boofcv.struct.convolve.Kernel2D_S32;
 import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
-
-import java.awt.image.BufferedImage;
-
-
 
 public class Outline {
     public static void outline(Planar<GrayU8> image, Planar<GrayU8> output){
