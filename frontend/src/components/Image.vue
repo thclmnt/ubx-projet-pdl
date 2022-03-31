@@ -19,4 +19,12 @@ const props = defineProps<{ id: number }>();
 	</div>
 </template>
 
-<style></style>
+<style>
+img {
+    display: inline-flex;
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 30px 20px;
+}</style>
