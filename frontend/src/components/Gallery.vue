@@ -4,10 +4,8 @@ import { api } from '@/http-api';
 import { ImageType } from '@/image';
 import router from "@/router";
 import ImageDisplay from './ImageDisplay.vue';
-import { Component } from '@angular/core';
 
 const imageList = ref<ImageType[]>([]);
-var selectedId = ref(-1);
 document.title = 'Gallerie'
 
 api.getImageList()
@@ -24,20 +22,13 @@ api.getImageList()
 }
 
   function select(e){
-  var modal = document.getElementById("myModal");
   var modalImg = document.getElementsByClassName("modal-content")
-  var captionText = document.getElementById("caption");
   const elem = e.target;
-  modal.style.display = "block";
   modalImg.src = elem.dataset.biggerSrc || elem.src;
-  captionText.innerHTML = elem.alt;
   window.location.href = modalImg.src;
   windowframe64(modalImg.src);
   //router.push({ name: 'image', params: { id: selectedId.value } })
-
   }
-
-
 </script>
 
 
@@ -45,11 +36,10 @@ api.getImageList()
 
 <template>
 <h3>Gallery</h3>
-  <div>
-  <div id="myModal" class="modal">
-    <ImageDisplay class="modal-content" v-for="image in imageList" :id="image.id" @click="select($event)" />
-  </div></div>
-   <div id="caption"></div>
+<div id="myModal" class="modal" v-for="image in imageList">
+    <ImageDisplay class="modal-content" :id="image.id" @click="select($event)" />
+  </div>
+
 </template>
 
 
@@ -70,10 +60,23 @@ img {
     cursor: pointer;
     transition: 0.3s;
     margin: 30px 20px;
+    outline: 1px solid rgba(255,255,255,.5);
+
+}
+img:active{
+    margin:0px 20px;
+    display:inline-block;
+    text-decoration:none;
+    color:black;
 }
 img:hover
 {
    opacity: 0.7;
+   -ms-transform: scale(1.3); /* IE 9 */
+   -webkit-transform: scale(1.3); /* Safari 3-8 */
+   transform: scale(1.3); 
 
 }
+
+
 </style>
