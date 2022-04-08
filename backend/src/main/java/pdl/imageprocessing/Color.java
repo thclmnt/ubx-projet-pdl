@@ -9,26 +9,26 @@ public class Color {
         int [] rgb = new int[3];
 		for (int y = 0; y < image.height; ++y) {
 			for (int x = 0; x < image.width; ++x) {
-                int red = image.getBand(0).get(x,y);
-                int green = image.getBand(1).get(x,y);
-                int blue = image.getBand(2).get(x,y);
-                rgbToHsv(gl0, gl1, gl2, hsv);
+                int gl0 = image.getBand(0).get(x,y);
+                int gl1 = image.getBand(1).get(x,y);
+                int gl2 = image.getBand(2).get(x,y);
+                Rgbhsv.rgbToHsv(gl0, gl1, gl2, hsv);
                 float ret0 = hsv[0]+teinte;
                 float ret1 = hsv[1];
                 float ret2 = hsv[2];
-                hsvToRgb(ret0, ret1, ret2, rgb);
-                red = rgb[0];
-                green = rgb[1];
-                blue = rgb[2];
-                if(red > 255) red = 255;
-                if(green > 255) green = 255;
-                if(blue > 255) blue = 255;
-                if(red<0) red = 0;
-                if(green<0) green = 0;
-                if(blue<0) blue = 0;
-                output.getBand(0).set(x,y, red);
-                output.getBand(1).set(x,y, green);
-                output.getBand(2).set(x,y, blue);
+                Rgbhsv.hsvToRgb(ret0, ret1, ret2, rgb);
+                gl0 = rgb[0];
+                gl1 = rgb[1];
+                gl2 = rgb[2];
+                if(gl0 > 255) gl0 = 255;
+                if(gl1 > 255) gl1 = 255;
+                if(gl2 > 255) gl2 = 255;
+                if(gl0<0) gl0 = 0;
+                if(gl1<0) gl1 = 0;
+                if(gl2<0) gl2 = 0;
+                output.getBand(0).set(x,y, gl0);
+                output.getBand(1).set(x,y, gl1);
+                output.getBand(2).set(x,y, gl2);
 			}
 		}
 	}
