@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -76,7 +81,13 @@ public class ImageController {
     }
 
     try {
-      imageDao.create(new Image(file.getOriginalFilename(), file.getBytes()));
+      InputStream imageInputStream = new ByteArrayInputStream(file.getBytes());
+      BufferedImage buf = ImageIO.read(imageInputStream);
+      ColorModel cm = buf.getColorModel();
+      
+      String size = String.valueOf(buf.getWidth()) + "*" + String.valueOf(buf.getHeight()) + "*" + String.valueOf(cm.getNumComponents());
+      
+      imageDao.create(new Image(file.getOriginalFilename(), file.getBytes(), size , contentType));
     } catch (IOException e) {
       return new ResponseEntity<>("Failure to read file", HttpStatus.NO_CONTENT);
     }
@@ -92,6 +103,8 @@ public class ImageController {
       ObjectNode objectNode = mapper.createObjectNode();
       objectNode.put("id", image.getId());
       objectNode.put("name", image.getName());
+      objectNode.put("size", image.getSize());
+      objectNode.put("type", image.getType());
       nodes.add(objectNode);
     }
     return nodes;

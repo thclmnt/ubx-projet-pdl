@@ -1,6 +1,10 @@
 package pdl.backend;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +36,13 @@ public class ImageDao implements Dao<Image> {
         String contentType = Files.probeContentType(imgPath);
         if (contentType.equalsIgnoreCase("image/jpeg") || contentType.equalsIgnoreCase("image/png")) {
           fileContent = Files.readAllBytes(imgPath);
-          Image img = new Image(imgPath.getFileName().toString(), fileContent);
+
+          InputStream imageInputStream = new ByteArrayInputStream(fileContent);
+          BufferedImage buf = ImageIO.read(imageInputStream);
+          ColorModel cm = buf.getColorModel();
+          
+          String size = String.valueOf(buf.getWidth()) + "*" + String.valueOf(buf.getHeight()) + "*" + String.valueOf(cm.getNumComponents());
+          Image img = new Image(imgPath.getFileName().toString(), fileContent, size, contentType);
           images.put(img.getId(), img);
         }
       } catch (IOException e) {
