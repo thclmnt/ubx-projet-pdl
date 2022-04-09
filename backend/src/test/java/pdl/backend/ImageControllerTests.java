@@ -60,27 +60,39 @@ public class ImageControllerTests {
 
     @Test
     @Order(4)
+    public void getImageModifiedShouldReturnSucess() throws Exception {
+        this.mockMvc.perform(get("/images/0?algorithm=flip")).andExpect(status().isOk());
+    }
+
+    @Test
+    @Order(5)
+    public void getImageModifiedShouldReturnBadRequest() throws Exception {
+        this.mockMvc.perform(get("/images/0?algorithm=fhbbf")).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @Order(6)
     public void deleteImagesShouldReturnMethodNotAllowed() throws Exception {
         /* Le delete n'agit pas sur un URL contenant seulement /images */
         this.mockMvc.perform(delete("/images")).andExpect(status().isMethodNotAllowed());
     }
 
     @Test
-    @Order(5)
+    @Order(7)
     public void deleteImageShouldReturnNotFound() throws Exception {
         /* Comme on a pas plus de 5000 images, la 5001e ne devrait pas exister */
         this.mockMvc.perform(delete("/images/5001")).andExpect(status().isNotFound());
     }
 
     @Test
-    @Order(6)
+    @Order(8)
     public void deleteImageShouldReturnSuccess() throws Exception {
         /* On admet encore une fois que l'image 0 existe et qu'on peut la supprimer */
         this.mockMvc.perform(delete("/images/0")).andExpect(status().isOk());
     }
 
     @Test
-    @Order(7)
+    @Order(9)
     public void createImageShouldReturnSuccess() throws Exception {
         final ClassPathResource cpr = new ClassPathResource ("test.jpg");
         MockMultipartFile mmf = new MockMultipartFile ("file", "test.jpg","image/jpeg", Files.readAllBytes(cpr.getFile().toPath()));
@@ -88,7 +100,7 @@ public class ImageControllerTests {
     }
 
     @Test
-    @Order(8)
+    @Order(10)
     public void createImageShouldReturnUnsupportedMediaType() throws Exception {
         /* Le type xcx n'est pas supporté et renverra une erreur */
         final ClassPathResource cpr = new ClassPathResource ("test.jpg");
