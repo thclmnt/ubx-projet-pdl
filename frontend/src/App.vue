@@ -26,17 +26,17 @@
 <style>
 #app {
 	text-align: center;
+	align-items: center;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #2c3e50;
-	border-radius: 25px;
 	height: fit-content;
 	display: inline-flex;
+	color: #293949;
+	border-radius: 30px;
 	background-color: rgba(0, 0, 0, 0.4);
 	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
-	align-items: center;
 	padding: 0 10px;
-	margin: 50px 0 0 0;
+	margin: 0px 0 0 0;
+	backdrop-filter: blur(15px);
 }
 
 ul {
@@ -48,40 +48,32 @@ ul {
 }
 li {
 	float: left;
-	list-style: none;
-	color: white;
 	font-family: sans-serif;
 	font-weight: bold;
-	padding: 12px 16px;
-	margin: 0 8px;
 	position: relative;
 	cursor: pointer;
-	white-space: nowrap;
+	color: white;
+	margin: 0 8px;
+	padding: 10px 15px;
 }
 li:hover {
 	filter: opacity(0.6);
-	background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+	background: linear-gradient(to bottom, #d9dbdb, #cbcbcc);
 	box-shadow: 0px 3px 20px 0px black;
 	transform: scale(1.2);
 }
 li a {
+	padding: 12px 14px;
+	text-decoration: none;
 	display: block;
 	color: white;
 	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
 }
-.error {
-	color: red;
-	font-weight: bold;
-	list-style-type: none;
-	margin-top: 1em;
-}
+
 body {
-	background-color: moccasin;
-	height: 100vh;
-	margin: 0;
 	display: flex;
 	justify-content: center;
+	background-color: rgba(202, 154, 83, 0.904);
+	margin: 0;
 }
 </style>
