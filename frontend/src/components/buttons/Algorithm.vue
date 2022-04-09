@@ -23,6 +23,7 @@ function applyAlgorithm() {
 			const inputValue = div?.querySelector("input")?.value;
 			params += "&value=" + inputValue;
 		} else if (selectedAlgorithm.value === "outline") {
+		} else if (selectedAlgorithm.value === "flip") {
 		}
 		api.getImageFilter(id, params)
 			.then((data: Blob) => {
@@ -60,6 +61,7 @@ function applyAlgorithm() {
 		<option value="histogramequalization">Histogram Equalization</option>
 		<option value="luminosity">Luminosity</option>
 		<option value="outline">Outline</option>
+		<option value="flip">Flip</option>
 	</select>
 
 	<div id="blur" v-if="selectedAlgorithm === 'blur'">
@@ -102,6 +104,7 @@ function applyAlgorithm() {
 		<output>0</output>
 	</div>
 	<div id="outline" v-if="selectedAlgorithm === 'outline'"></div>
+	<div id="flip" v-if="selectedAlgorithm === 'flip'"></div>
 	<button @click="applyAlgorithm">Apply Algorithm</button>
 
 	<br />

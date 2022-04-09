@@ -13,6 +13,7 @@ import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
 import pdl.imageprocessing.Blur;
 import pdl.imageprocessing.Color;
+import pdl.imageprocessing.Flip;
 import pdl.imageprocessing.Luminosity;
 import pdl.imageprocessing.Outline;
 
@@ -86,7 +87,12 @@ public class Algorithm {
                     Outline.outline(planar, copy);
                     output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
+                case "flip":
+                    // id?algorithm=flip
 
+                    Flip.flip(planar, copy);
+                    output = Converter.PlanarToInputStream(copy);
+                    return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));
                 default:
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }

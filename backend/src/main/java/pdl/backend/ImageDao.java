@@ -29,7 +29,9 @@ public class ImageDao implements Dao<Image> {
     if (!Files.exists(path)) {
       throw new IOException("'images' folder not found");
     };
-
+    
+    // 999 is the level of recursion, this number was pick randomly
+    // in hopes no one ever creates a image this deeply nested.
     Files.find(path, 999, (p, bfa) -> bfa.isRegularFile()).forEach((Path imgPath) -> {
       byte[] fileContent;
       try {
