@@ -1,15 +1,13 @@
 # PDL
 
-Install the app (first time only)
-`cd frontend && npm i`
-`cd .. && mvn clean install`
+Launch the app
 
-Launch the app (prod)
+`mvn --projects frontend initialize`
+
+`mvn --projects frontend build`
+
 `mvn --projects backend spring-boot:run`
 
-Launch the app (dev)
-`cd backend && mvn spring-boot:run`
-`cd frontend && npm run dev`
 
 # Application local url:
 
