@@ -3,6 +3,7 @@ import { api } from "@/http-api";
 import { defineProps, ref } from "vue";
 
 const props = defineProps<{ id: number }>();
+const editedImageData = ref(new Blob());
 const selectedAlgorithm = ref("");
 
 function applyAlgorithm() {
@@ -37,17 +38,36 @@ function applyAlgorithm() {
 							const imgElt = document.createElement("img");
 							galleryElt.appendChild(imgElt);
 							if (imgElt !== null && (reader.result as string)) {
-								imgElt.setAttribute("src", reader.result as string);
-								imgElt.setAttribute("id", "imgmodified")
+								imgElt.setAttribute(
+									"src",
+									reader.result as string
+								);
+								imgElt.setAttribute("id", "imgmodified");
 							}
 						} else {
-							imgExist.setAttribute("src", reader.result as string);
+							imgExist.setAttribute(
+								"src",
+								reader.result as string
+							);
 						}
 					}
 				};
+				editedImageData.value = data;
 			})
 			.catch((e) => {
 				console.log(e.message);
+			});
+	}
+}
+
+function saveEditedImageToServer() {
+	if (editedImageData.value.size != 0) {
+		const formData = new FormData();
+		formData.append("file", editedImageData.value, String(props.id) + " (edited)");
+		api.createImage(formData)
+			.then(() => {})
+			.catch((e) => {
+				console.log(e);
 			});
 	}
 }
@@ -110,7 +130,10 @@ function applyAlgorithm() {
 	<br />
 	<br />
 	<br />
-	<figure id="display"></figure>  
+	<figure id="display"></figure>
+	<button v-if="editedImageData.size > 0" @click="saveEditedImageToServer">
+		Save Image to Gallery
+	</button>
 </template>
 
 <style></style>
