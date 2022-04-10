@@ -30,7 +30,7 @@
 	font-family: Arial, Helvetica, sans-serif;
 	height: fit-content;
 	display: inline-flex;
-	color: #293949;
+	color: #405b77;
 	border-radius: 30px;
 	background-color: rgba(0, 0, 0, 0.4);
 	-webkit-backdrop-filter: blur(10px);

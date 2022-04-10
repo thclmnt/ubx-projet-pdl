@@ -145,9 +145,9 @@ function saveEditedImageToServer() {
 	</div>
 	<div id="outline" v-if="selectedAlgorithm === 'outline'"></div>
 	<div id="flip" v-if="selectedAlgorithm === 'flip'"></div>
+	<br>
 	<button @click="applyAlgorithm">Apply Algorithm</button>
 
-	<br />
 	<br />
 	<br />
 	<figure id="display"></figure>
