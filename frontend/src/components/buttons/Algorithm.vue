@@ -149,7 +149,6 @@ function saveEditedImageToServer() {
 	<button @click="applyAlgorithm">Apply Algorithm</button>
 
 	<br />
-	<br />
 	<figure id="display"></figure>
 	<button v-if="editedImageData.size > 0" @click="saveEditedImageToServer">
 		Save Image to Gallery

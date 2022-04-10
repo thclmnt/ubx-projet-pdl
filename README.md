@@ -4,7 +4,7 @@ Launch the app
 
 `mvn --projects frontend initialize`
 
-`mvn --projects frontend build`
+`mvn --projects frontend compile`
 
 `mvn --projects backend spring-boot:run`
 
