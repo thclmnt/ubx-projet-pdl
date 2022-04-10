@@ -4,8 +4,7 @@ import boofcv.struct.image.GrayU8;
 import boofcv.struct.image.Planar;
 
 public class Blur {
-    public static void moyen(Planar<GrayU8> image, Planar<GrayU8> output) {
-        int size = 7;
+    public static void mean(Planar<GrayU8> image, Planar<GrayU8> output, int size) {
         for (int y = size/2; y < image.height-size/2; ++y) {
             for (int x = size/2; x < image.width - size/2; ++x) {
                 int r0=0;
@@ -32,7 +31,7 @@ public class Blur {
         }
     }
 
-    public static void gaussien(Planar<GrayU8> image, Planar<GrayU8> output) {
+    public static void gaussian(Planar<GrayU8> image, Planar<GrayU8> output) {
 
         int [][] kernel =   {{1,2,3,2,1},
                             {2,6,8,6,2},

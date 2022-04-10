@@ -36,9 +36,14 @@ public class Algorithm {
                         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                     }
                     if (params.get("type").equalsIgnoreCase("moyen")) {
-                        Blur.moyen(planar, copy);
+                        if (!(params.containsKey("value"))) {
+                            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                        } else {
+                            value = NumberUtils.toInt(params.get("value"), 0);
+                            Blur.mean(planar, copy, value);
+                        }
                     } else {
-                        Blur.gaussien(planar, copy);
+                        Blur.gaussian(planar, copy);
                     }
                     output = Converter.PlanarToInputStream(copy);
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(new InputStreamResource(output));

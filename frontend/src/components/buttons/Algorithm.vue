@@ -5,6 +5,7 @@ import { defineProps, ref } from "vue";
 const props = defineProps<{ id: number }>();
 const editedImageData = ref(new Blob());
 const selectedAlgorithm = ref("");
+const blurSelected = ref("moyen");
 
 function applyAlgorithm() {
 	const id = props.id;
@@ -14,6 +15,10 @@ function applyAlgorithm() {
 		if (selectedAlgorithm.value === "blur") {
 			const selectValue = div?.querySelector("select")?.value;
 			params += "&type=" + selectValue;
+			if (blurSelected.value === "moyen") {
+				const inputValue = div?.querySelector("input")?.value
+				params += "&value=" + inputValue;
+			}
 		} else if (selectedAlgorithm.value === "color") {
 			const inputValue = div?.querySelector("input")?.value;
 			params += "&value=" + inputValue;
@@ -63,7 +68,11 @@ function applyAlgorithm() {
 function saveEditedImageToServer() {
 	if (editedImageData.value.size != 0) {
 		const formData = new FormData();
-		formData.append("file", editedImageData.value, String(props.id) + " (edited)");
+		formData.append(
+			"file",
+			editedImageData.value,
+			String(props.id) + " (edited)"
+		);
 		api.createImage(formData)
 			.then(() => {})
 			.catch((e) => {
@@ -86,17 +95,28 @@ function saveEditedImageToServer() {
 
 	<div id="blur" v-if="selectedAlgorithm === 'blur'">
 		<p>Type</p>
-		<select>
+		<select v-model="blurSelected" @change="">
 			<option value="moyen">Moyen</option>
 			<option value="gaussien">Gaussien</option>
 		</select>
+		<div v-if="blurSelected === 'moyen'">
+			<p>Valeur :</p>
+			<input
+				type="range"
+				min="1"
+				max="100"
+				value="0"
+				oninput="this.nextElementSibling.value = this.value"
+			/>
+			<output>0</output>
+		</div>
 	</div>
 	<div id="color" v-if="selectedAlgorithm === 'color'">
 		<p>Valeur :</p>
 		<input
 			type="range"
-			min="-100"
-			max="100"
+			min="0"
+			max="360"
 			value="0"
 			oninput="this.nextElementSibling.value = this.value"
 		/>
