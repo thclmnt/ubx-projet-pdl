@@ -96,11 +96,11 @@ function saveEditedImageToServer() {
 	<div id="blur" v-if="selectedAlgorithm === 'blur'">
 		<p>Type</p>
 		<select v-model="blurSelected" @change="">
-			<option value="moyen">Moyen</option>
-			<option value="gaussien">Gaussien</option>
+			<option value="moyen">Mean</option>
+			<option value="gaussien">Gaussian</option>
 		</select>
 		<div v-if="blurSelected === 'moyen'">
-			<p>Valeur :</p>
+			<p>Value :</p>
 			<input
 				type="range"
 				min="1"
@@ -112,7 +112,7 @@ function saveEditedImageToServer() {
 		</div>
 	</div>
 	<div id="color" v-if="selectedAlgorithm === 'color'">
-		<p>Valeur :</p>
+		<p>Value :</p>
 		<input
 			type="range"
 			min="0"
@@ -126,14 +126,14 @@ function saveEditedImageToServer() {
 		id="histogramequalization"
 		v-if="selectedAlgorithm === 'histogramequalization'"
 	>
-		<p>Canal</p>
+		<p>Channel</p>
 		<select>
 			<option value="S">S (Saturation)</option>
 			<option value="V">V (Value)</option>
 		</select>
 	</div>
 	<div id="luminosity" v-if="selectedAlgorithm === 'luminosity'">
-		<p>Valeur :</p>
+		<p>Value :</p>
 		<input
 			type="range"
 			min="-100"
